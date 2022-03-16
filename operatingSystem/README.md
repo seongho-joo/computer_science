@@ -8,6 +8,10 @@
   - [그래픽 사용자 인터페이스(Graphic User Interface) 🔗](#그래픽-사용자-인터페이스graphic-user-interface-)
   - [정리](#정리)
 - [시스템 호출(System Call)](#시스템-호출system-call)
+- [프로세스 개념(Process Concept)](#프로세스-개념process-concept)
+  - [프로세스 상태(Process State) 🔗](#프로세스-상태process-state-)
+  - [프로세스 제어 블록(Process Control Block) 🔗](#프로세스-제어-블록process-control-block-)
+  - [스레드(Treads) 🔗](#스레드treads-)
 
 </details>
 
@@ -86,3 +90,38 @@ CLI 또는 GUI를 사용할 것인지는 개인의 선호에 따라 달려있다
 
 **Windows와 Unix 시스템 호출의 예**
 ![image](https://user-images.githubusercontent.com/45463495/158323681-68208c27-e5f0-4675-810a-e09d55ce038a.png)
+
+## 프로세스 개념(Process Concept)
+디스크에 있는 것은 프로그램, 메모리에 적재된 것은 프로세스라 한다. 프로세스는 **Stack**, **Data**, **Heap**, **Text**로 나뉜다.
+
+<img width="270" alt="image" src="https://user-images.githubusercontent.com/45463495/158524650-ee3f3b21-4db8-4d67-8226-33de80b34ff0.png">
+
+- Text: 실행 코드
+- Stack: 함수를 호출할 때 임시 데이터 저장소(ex: 함수 매개변수, 복귀 주소 및 지역 변수)
+- Data: 전역 변수 저장
+- Heap: 프로세스 실행 중 동적으로 할당되는 메모리
+
+### 프로세스 상태(Process State) 🔗
+<img width="950" alt="image" src="https://user-images.githubusercontent.com/45463495/158524563-e5ef796d-a9ca-47ae-bd65-40c8a3db4b29.png">
+
+- new: 프로세스가 처음으로 생성됨
+- ready: 프로세스가 프로세서에게 할당되기를 기다림
+- running: 명령어들이 실행되고있음
+- wating: 프로세스가 이벤트를 기다림
+- terminated: 프로세스의 실행이 종료됨
+
+### 프로세스 제어 블록(Process Control Block) 🔗
+PCB는 각 프로세스마다 달라지는 모든 정보를 저장하는 저장소의 역할을 한다.
+
+<img width="254" alt="image" src="https://user-images.githubusercontent.com/45463495/158524479-4c888a28-7b04-43ae-a1a8-f09e3d03f8a6.png">
+
+- Process state: 프로세스의 상태
+- Program counter: 프로세스가 다음에 실행해야 할 명령어의 주소를 가르킴
+- CPU registers: 프로세스가 인터럽트 이후 올바르게 작업을 이어가기 위해 참조하는 CPU 레지스터 값
+- CPU-scheduling information: 프로세스 우선순위, 스케줄 큐에 대한 포인터와 다른 스케줄 매개변수들을 포함한 정보
+- Memory-management information: base 레지스터, limite 레지스터의 값, 페이지 테이블 또는 세그먼트 테이블 등과 같은 정보
+- Accounting information: CPU 사용 시간, 시간 제한, 프로세스 번호 등의 정보
+- I/O status information: 프로세스에게 할당된 입출력 장치 목록과 열린 파일의 목록 등의 정보
+
+### 스레드(Treads) 🔗
+싱글 스레드는 한번에 하나의 작업만 할 수 있다. 예를 들면 사용자가 워드 프로세스 프로그램을 실행한다면, 글자를 입력하면서 동시에 문법 검사기를 실행할 수 없다.
